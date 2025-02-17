@@ -7,14 +7,15 @@ import { Copy, ThumbsUp } from "lucide-react";
 import { useState } from "react";
 
 // Temporary data
+// first one is an actual code of mine
 const seedsData = [
   {
     id: 1,
-    code: "BALT-XXXX-YYYY-ZZZZ",
-    description: "Great starting hand with multiple Jokers. Perfect for Steel stake runs.",
+    code: "LABBEPM9",
+    description: "Mime PhotoChad combo with great extra jokers",
     rating: 42,
     version: "1.0.0",
-    tags: ["Steel Stake", "Jokers", "Easy"],
+    tags: ["Legendary", "Baron"],
     createdAt: "2024-02-14",
   },
   {
@@ -55,7 +56,7 @@ export function Seeds() {
           <CardHeader>
             <CardTitle className="font-mono text-red-500">{seed.code}</CardTitle>
             <CardDescription className="text-zinc-400">
-              Version {seed.version} • {seed.createdAt}
+              Uploaded {seed.createdAt} by W
             </CardDescription>
           </CardHeader>
           <CardContent>

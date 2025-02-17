@@ -1,9 +1,29 @@
+'use client';
+
 import { Seeds } from "@/components/seeds";
 import { Button } from "@/components/ui/button";
 import { WalletCardsIcon as Cards } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getAllJokers } from '@/helpers/jokerHelper';
+
 
 export default function Home() {
+  const [data, setData] = useState(null);
+
+  async function fetchData() {
+    const { data, error } = await getAllJokers();
+    if (error) {
+      console.error('Error fetching data:', error);
+      return;
+    }
+    setData(data);
+    console.log("data", data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="border-b border-white/10">
@@ -15,7 +35,7 @@ export default function Home() {
           <nav>
             <Link href="/upload">
               <Button variant="outline" className="border-red-500 text-red-500 hover:bg-red-950 hover:text-red-400">
-                Upload Seed
+                Upload
               </Button>
             </Link>
           </nav>

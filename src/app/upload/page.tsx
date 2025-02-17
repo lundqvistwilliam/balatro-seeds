@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { WalletCardsIcon as Cards } from "lucide-react";
 import Link from "next/link";
+import { CardSelect } from "@/components/card-select";
 
 export default function Upload() {
   return (
@@ -28,7 +29,7 @@ export default function Upload() {
             <form className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="seed">Seed Code</Label>
-                <Input id="seed" placeholder="BALT-XXXX-YYYY-ZZZZ" className="font-mono bg-zinc-900 border-zinc-800" />
+                <Input id="seed" placeholder="Seed, XXXXXXXX" className="font-mono bg-zinc-900 border-zinc-800" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
@@ -37,6 +38,10 @@ export default function Upload() {
                   placeholder="Describe what makes this seed interesting..."
                   className="bg-zinc-900 border-zinc-800"
                 />
+              </div>
+              <div className="space-y-2">
+                <Label>Notable Cards</Label>
+                <CardSelect />
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
