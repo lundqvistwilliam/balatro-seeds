@@ -28,11 +28,11 @@ export default function Upload() {
           <CardContent>
             <form className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="seed">Seed Code</Label>
+                <Label htmlFor="seed" className="text-zinc-400">Seed Code</Label>
                 <Input id="seed" placeholder="Seed, XXXXXXXX" className="font-mono bg-zinc-900 border-zinc-800" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description" className="text-zinc-400">Description</Label>
                 <Textarea
                   id="description"
                   placeholder="Describe what makes this seed interesting..."
@@ -40,14 +40,14 @@ export default function Upload() {
                 />
               </div>
               <div className="space-y-2">
-                <Label>Notable Cards</Label>
+                <Label className="text-zinc-400">Notable Cards</Label>
                 <CardSelect />
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="version">Game Version</Label>
+                  <Label htmlFor="version" className="text-zinc-400">Game Version</Label>
                   <Select>
-                    <SelectTrigger className="bg-zinc-900 border-zinc-800">
+                    <SelectTrigger className="bg-zinc-900 border-zinc-800 text-zinc-400">
                       <SelectValue placeholder="Select version" />
                     </SelectTrigger>
                     <SelectContent>
@@ -57,9 +57,9 @@ export default function Upload() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="tags">Tags</Label>
+                  <Label htmlFor="tags" className="text-zinc-400">Tags</Label>
                   <Select>
-                    <SelectTrigger className="bg-zinc-900 border-zinc-800">
+                    <SelectTrigger className="bg-zinc-900 border-zinc-800 text-zinc-400">
                       <SelectValue placeholder="Select tags" />
                     </SelectTrigger>
                     <SelectContent>

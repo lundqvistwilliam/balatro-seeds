@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { getAllJokers } from "@/helpers/jokerHelper";
 import { Badge } from "@/components/ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import vercel from '../../public/vercel.svg';
 
 type Joker = {
   id: string;
@@ -64,11 +65,9 @@ export function CardSelect() {
       case "name-desc":
         return filtered.sort((a, b) => b.name.localeCompare(a.name));
       case "id-desc":
-        console.log("id desc");
         return filtered.sort((a, b) => b.joker_number - a.joker_number);
       case "id":
       default:
-        console.log("default");
         return filtered.sort((a, b) => a.joker_number - b.joker_number);
     }
   }, [jokers, searchQuery, selectedRarities, sortType]);
@@ -131,7 +130,7 @@ export function CardSelect() {
             </span>
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[725px] bg-zinc-950 border-zinc-900">
+        <DialogContent className="sm:max-w-[725px] bg-zinc-950 border-zinc-900" aria-describedby="Select notable cards">
           <DialogHeader>
             <DialogTitle>Select Cards</DialogTitle>
           </DialogHeader>
@@ -142,7 +141,7 @@ export function CardSelect() {
                 placeholder="Search cards..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-8 bg-zinc-900 border-zinc-800"
+                className="pl-8 bg-zinc-900 border-zinc-800 text-zinc-400"
               />
             </div>
             <div className="flex flex-wrap items-center gap-4">
@@ -191,8 +190,8 @@ export function CardSelect() {
                       )}
                     >
                       <img
-                        src={joker.image || "/placeholder.svg"}
-                        alt={joker.name}
+                        src={joker.image && joker.image !== "" ? joker.image : vercel.src}
+                        alt={joker.name || "Joker card"}
                         className="h-full w-full object-cover transition-opacity group-hover:opacity-50"
                       />
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
