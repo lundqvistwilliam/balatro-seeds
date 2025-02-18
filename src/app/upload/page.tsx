@@ -40,7 +40,7 @@ export default function Upload() {
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-zinc-400">Notable Cards</Label>
+                <Label className="text-zinc-400">Jokers</Label>
                 <CardSelect />
               </div>
               <div className="grid gap-4 md:grid-cols-2">

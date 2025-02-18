@@ -13,6 +13,8 @@ import { getAllJokers } from "@/helpers/jokerHelper";
 import { Badge } from "@/components/ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import vercel from '../../public/vercel.svg';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { Card, CardContent } from "./ui/card";
 
 type Joker = {
   id: string;
@@ -23,6 +25,13 @@ type Joker = {
 };
 
 type SortType = "id" | "id-desc" | "name-asc" | "name-desc";
+
+const rarityColors = {
+  Common: "#0391fa",
+  Uncommon: "#36bd85",
+  Rare: "#fe4b42",
+  Legendary: "#ab5ab6"
+};
 
 export function CardSelect() {
   const [jokers, setJokers] = React.useState<Joker[]>([]);
@@ -125,14 +134,14 @@ export function CardSelect() {
           >
             <span className="text-zinc-400">
               {selectedJokers.length === 0
-                ? "Select notable cards..."
+                ? "Add Joker cards..."
                 : `${selectedJokers.length} card${selectedJokers.length === 1 ? "" : "s"} selected`}
             </span>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[725px] bg-zinc-950 border-zinc-900" aria-describedby="Select notable cards">
           <DialogHeader>
-            <DialogTitle>Select Cards</DialogTitle>
+            <DialogTitle className="text-white">Select Cards</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="relative">
@@ -206,7 +215,7 @@ export function CardSelect() {
                     </div>
                     <div className="mt-2 text-sm">
                       <div className="font-medium text-zinc-200">{joker.name}</div>
-                      <div className="text-zinc-500">{joker.rarity}</div>
+                      <div className="text-zinc-500" style={{ color: rarityColors[joker.rarity] }}>{joker.rarity}</div>
                     </div>
                   </div>
                 ))}
@@ -241,22 +250,55 @@ export function CardSelect() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <div className="flex flex-wrap gap-2">
-        {selectedJokers.map((joker) => (
-          <Badge key={joker.id} variant="outline" className="gap-1 border-zinc-800 text-zinc-400">
-            {joker.name}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                removeJoker(joker.id);
-              }}
-              className="ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
-            >
-              <X className="h-3 w-3 text-zinc-500 hover:text-zinc-300" />
-            </button>
-          </Badge>
-        ))}
-      </div>
+      <Carousel
+        opts={{
+          align: "start",
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
+          {selectedJokers.map((joker) => (
+            <CarouselItem key={joker.id} className="md:basis-1/4 lg:basis-1/4">
+              <div className="p-1">
+                <Card className="bg-zinc-900 border-zinc-800">
+                  <CardContent className="flex flex-col items-center justify-center p-1 aspect-square relative overflow-hidden">
+                    <div className="w-2/3 h-2/3 mb-7">
+                      <img
+                        src={joker.image || "/placeholder.svg"}
+                        alt={`Joker ${joker.name}`}
+                        className="w-full h-full object-contain rounded-md"
+                      />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-gradient-to-t from-black/90 via-black/80 to-transparent">
+                      <span className="text-sm font-semibold text-zinc-200 text-center block">{joker.name}</span>
+                      <span
+                        className="text-xs text-center block"
+                        style={{ color: rarityColors[joker.rarity] }}
+                      >
+                        {joker.rarity}
+                      </span>                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        removeJoker(joker.id);
+                      }}
+                      className="absolute top-2 right-2 rounded-full p-1 bg-black/40 hover:bg-black/60 transition-colors"
+                    >
+                      <X className="h-4 w-4 text-zinc-400 hover:text-zinc-200" />
+                    </button>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        {selectedJokers.length > 0 && (
+          <>
+            <CarouselPrevious className="bg-zinc-700 border-zinc-800 hover:bg-zinc-800" />
+            <CarouselNext className="bg-zinc-700 border-zinc-800 hover:bg-zinc-800" />
+          </>
+        )}
+      </Carousel>
     </div>
   );
 }
