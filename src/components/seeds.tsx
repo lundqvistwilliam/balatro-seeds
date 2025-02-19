@@ -20,8 +20,8 @@ const seedsData = [
   },
   {
     id: 2,
-    code: "BALT-AAAA-BBBB-CCCC",
-    description: "Incredible Planet seed with early Meteor card. Guaranteed Celestial pack by round 3.",
+    code: "62CUB91A",
+    description: "Chad + S&B by round 3. Mime, Hologram, Photograph, Steel Joker",
     rating: 89,
     version: "1.0.0",
     tags: ["Planet", "Celestial", "Challenge"],

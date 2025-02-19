@@ -24,6 +24,11 @@ type Joker = {
   rarity: string;
 };
 
+type CardSelectProps = {
+  onSelectedJokersChange: (jokers: Joker[]) => void;
+  selectedJokers: Joker[];
+};
+
 type SortType = "id" | "id-desc" | "name-asc" | "name-desc";
 
 const rarityColors = {
@@ -33,9 +38,9 @@ const rarityColors = {
   Legendary: "#ab5ab6"
 };
 
-export function CardSelect() {
+export function CardSelect({ onSelectedJokersChange, selectedJokers }: CardSelectProps) {
   const [jokers, setJokers] = React.useState<Joker[]>([]);
-  const [selectedJokers, setSelectedJokers] = React.useState<Joker[]>([]);
+  // const [selectedJokers, setSelectedJokers] = React.useState<Joker[]>([]);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -82,13 +87,15 @@ export function CardSelect() {
   }, [jokers, searchQuery, selectedRarities, sortType]);
 
   const toggleJoker = (joker: Joker) => {
-    setSelectedJokers((prev) =>
-      prev.some((j) => j.id === joker.id) ? prev.filter((j) => j.id !== joker.id) : [...prev, joker],
-    );
+    const newSelectedJokers = selectedJokers.some((j) => j.id === joker.id)
+      ? selectedJokers.filter((j) => j.id !== joker.id)
+      : [...selectedJokers, joker];
+    onSelectedJokersChange(newSelectedJokers);
   };
 
   const removeJoker = (jokerId: string) => {
-    setSelectedJokers((prev) => prev.filter((j) => j.id !== jokerId));
+    const newSelectedJokers = selectedJokers.filter((j) => j.id !== jokerId);
+    onSelectedJokersChange(newSelectedJokers);
   };
 
   const cycleSortType = () => {

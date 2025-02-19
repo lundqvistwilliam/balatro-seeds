@@ -18,19 +18,22 @@ export default function Home() {
       return;
     }
     setData(data);
-    console.log("data", data);
   }
 
+  /*
   useEffect(() => {
     fetchData();
   }, []);
+  */
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="border-b border-white/10">
         <div className="container flex items-center justify-between py-6">
           <div className="flex items-center gap-2">
             <Cards className="h-6 w-6 text-red-500" />
-            <h1 className="text-2xl font-bold">Balatro Seeds</h1>
+            <Link href="/">
+              <h1 className="text-2xl font-bold">Balatro Seeds</h1>
+            </Link>
           </div>
           <nav>
             <Link href="/upload">
