@@ -6,25 +6,27 @@ import { WalletCardsIcon as Cards } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getAllJokers } from '@/helpers/jokerHelper';
+import { getAllSeeds } from '@/helpers/seedHelper';
 
 
 export default function Home() {
   const [data, setData] = useState(null);
 
   async function fetchData() {
-    const { data, error } = await getAllJokers();
+    const { data, error } = await getAllSeeds();
     if (error) {
       console.error('Error fetching data:', error);
       return;
     }
     setData(data);
+    console.log("seeds data", data);
   }
 
-  /*
+
   useEffect(() => {
     fetchData();
   }, []);
-  */
+
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="border-b border-white/10">
