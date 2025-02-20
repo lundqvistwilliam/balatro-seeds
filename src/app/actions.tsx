@@ -41,8 +41,8 @@ export async function submitSeed({ seedCode, description, gameVersion, tags, jok
       const { error: jokersError } = await supabase.from("seed_jokers").insert(
         jokers.map((joker) => ({
           seed_id: seed.id,
-          joker_id: joker.id,
           joker_number: joker.joker_number,
+          joker: joker.id,
         })),
       );
 

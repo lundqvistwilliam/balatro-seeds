@@ -96,7 +96,7 @@ export function Seeds() {
               onClick={() => handleLike(seed.id)}
             >
               <ThumbsUp className="mr-2 h-4 w-4" />
-              {seed.rating}
+              {seed.rating ?? 0}
             </Button>
             <Button
               variant="ghost"
@@ -110,6 +110,7 @@ export function Seeds() {
           </CardFooter>
         </Card>
       ))}
+      {/*  
       {seeds.map((seed) => (
         <Card key={seed.id} className="bg-zinc-950 border-zinc-900">
           <CardHeader>
@@ -150,6 +151,7 @@ export function Seeds() {
           </CardFooter>
         </Card>
       ))}
+        */}
     </div>
   );
 }
